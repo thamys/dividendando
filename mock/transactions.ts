@@ -49,5 +49,5 @@ export default [
       type: TransactionTypes.Purchase,
       quantity: 1,
       price: 4154
-    },
+    }
   ];
