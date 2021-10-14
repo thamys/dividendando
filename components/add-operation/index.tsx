@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Form, Input, Button, Radio, Row } from "antd";
+import { Col, Form, Input, Button, Radio, Row, DatePicker } from "antd";
 
 const AddOperation = () => {
   const onFinish = (values: any) => {
@@ -26,7 +26,7 @@ const AddOperation = () => {
         </Col>
         <Col>
           <Form.Item label="Data" name="date" rules={[{ required: true }]}>
-            <Input />
+            <DatePicker />
           </Form.Item>
         </Col>
         <Col>
