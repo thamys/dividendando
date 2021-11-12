@@ -52,7 +52,11 @@ const AddOperation = () => {
           </Form.Item>
         </Col>
         <Col>
-          <Form.Item label="Preço" name="price" rules={[{ required: true }]}>
+          <Form.Item
+            label="Preço unitário"
+            name="price"
+            rules={[{ required: true }]}
+          >
             <Input />
           </Form.Item>
         </Col>

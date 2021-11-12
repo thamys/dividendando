@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Transaction } from "../mock/transactions";
 
 export const transactionColumns = [
   {
@@ -24,7 +25,7 @@ export const transactionColumns = [
     key: "quantity",
   },
   {
-    title: "Valor",
+    title: "Valor unitário",
     dataIndex: "price",
     key: "price",
     render: (price: number) =>
@@ -32,5 +33,16 @@ export const transactionColumns = [
         style: "currency",
         currency: "BRL",
       }),
+  },
+  {
+    title: "Valor total",
+    key: "price",
+    render: ({ price, quantity }: Transaction) => {
+      const total = (price * quantity) / 100;
+      return total.toLocaleString("pt-br", {
+        style: "currency",
+        currency: "BRL",
+      });
+    },
   },
 ];
