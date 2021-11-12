@@ -1,29 +1,53 @@
-import React from "react";
-import { Layout, Menu, Breadcrumb } from "antd";
+import React, { useMemo, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Layout, Menu } from "antd";
+import styles from "./styles.module.css";
+
 const { Header, Content, Footer } = Layout;
 
 const AppLayout: React.FC = ({ children }) => {
+  const router = useRouter();
+  const [activeNav, setActiveNav] = useState(router.pathname);
+
+  const navs = useMemo(
+    () => [
+      {
+        title: "Minha carteira",
+        url: "/carteira",
+      },
+      {
+        title: "Extrato de Dividendos",
+        url: "/dividendos",
+      },
+      {
+        title: "Adicionar operação",
+        url: "/operacoes",
+      },
+    ],
+    []
+  );
+
   return (
     <Layout className="layout">
       <Header>
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-          {new Array(15).fill(null).map((_, index) => {
-            const key = index + 1;
-            return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
+        <div className={styles.logo}>Dividendando</div>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[activeNav]}>
+          {navs.map((nav) => {
+            return (
+              <Menu.Item key={nav.url} onClick={() => setActiveNav(nav.url)}>
+                <Link href={nav.url}>{nav.title}</Link>
+              </Menu.Item>
+            );
           })}
         </Menu>
       </Header>
-      <Content style={{ padding: "0 50px" }}>
-        <Breadcrumb style={{ margin: "16px 0" }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+      <Content style={{ padding: "24px 48px" }}>
         <div className="site-layout-content">{children}</div>
       </Content>
       <Footer style={{ textAlign: "center" }}>
-        Ant Design ©2018 Created by Ant UED
+        Dividendando ©2021 Created by{" "}
+        <a href="https://github.com/thamys">thamys</a>
       </Footer>
     </Layout>
   );
