@@ -5,7 +5,6 @@ import { collection, DocumentData, query, getDocs } from "@firebase/firestore";
 
 import AppLayout from "../../components/layout";
 import AddOperation from "../../components/add-operation";
-// import transactions from "../../mock/transactions";
 import { transactionColumns } from "../../constants/columns";
 
 const transactionsCollection = collection(firestore, "transactions");

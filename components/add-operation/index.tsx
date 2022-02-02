@@ -1,9 +1,43 @@
 import React from "react";
-import { Col, Form, Input, Button, Radio, Row, DatePicker } from "antd";
+import { doc } from "@firebase/firestore"; // for creating a pointer to our Document
+import { setDoc } from "firebase/firestore"; // for adding the Document to Collection
+import {
+  Col,
+  Form,
+  Input,
+  Button,
+  Radio,
+  Row,
+  DatePicker,
+  message,
+} from "antd";
+import { firestore } from "../../firebase/clientApp"; // firestore instance
+import { Transaction } from "../../mock/transactions";
+import moment from "moment";
 
 const AddOperation = () => {
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
+  const addTransaction = async (transactionData: Transaction) => {
+    // get the current timestamp
+    const timestamp: string = Date.now().toString();
+    // create a pointer to our Document
+    const _transaction = doc(firestore, `transactions/${timestamp}`);
+
+    try {
+      //add the Document
+      await setDoc(_transaction, transactionData);
+      //show a success message
+      message.success("Transaction added successfully");
+    } catch (error) {
+      //show an error message
+      message.error("An error occurred while adding transaction");
+    }
+  };
+
+  const onFinish = (values: Transaction) => {
+    addTransaction({
+      ...values,
+      date: new Date(values.date),
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -20,7 +54,7 @@ const AddOperation = () => {
     >
       <Row gutter={[16, 16]} align="bottom">
         <Col>
-          <Form.Item label="Ativo" name="active" rules={[{ required: true }]}>
+          <Form.Item label="Ativo" name="symbol" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
         </Col>
@@ -33,11 +67,10 @@ const AddOperation = () => {
           <Form.Item label="Tipo" name="type" rules={[{ required: true }]}>
             <Radio.Group
               options={[
-                { label: "Compra", value: "buy" },
-                { label: "Venda", value: "sale" },
+                { label: "Compra", value: 0 },
+                { label: "Venda", value: 1 },
               ]}
-              onChange={() => ({})}
-              value={"buy"}
+              value={0}
               optionType="button"
             />
           </Form.Item>
