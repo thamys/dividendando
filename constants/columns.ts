@@ -1,23 +1,24 @@
+import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 import { Transaction } from "../mock/transactions";
 
 export const transactionColumns = [
   {
     title: "Ativo",
-    dataIndex: "stock",
-    key: "stock",
+    dataIndex: "symbol",
+    key: "symbol",
   },
   {
     title: "Data",
     dataIndex: "date",
     key: "date",
-    render: (date: number) => moment(date).format("DD/MM/YYYY"),
+    render: (date: Timestamp) => moment(date.toDate()).format("DD/MM/YYYY"),
   },
   {
     title: "Tipo",
     dataIndex: "type",
     key: "type",
-    render: (type: number) => (0 ? "COMPRA" : "VENDA"),
+    render: (type: number) => (type === 0 ? "COMPRA" : "VENDA"),
   },
   {
     title: "Quantidade",

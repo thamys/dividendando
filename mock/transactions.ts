@@ -3,7 +3,7 @@ import moment from "moment";
 
 export type Transaction = {
   key: string;
-  stock: string;
+  symbol: string;
   date: Date;
   type: TransactionTypes;
   quantity: number;
@@ -13,7 +13,7 @@ export type Transaction = {
 export default [
   {
     key: "1",
-    stock: "IRDM11",
+    symbol: "IRDM11",
     date: moment(),
     type: TransactionTypes.Purchase,
     quantity: 1,
@@ -21,7 +21,7 @@ export default [
   },
   {
     key: "2",
-    stock: "IRDM11",
+    symbol: "IRDM11",
     date: moment(),
     type: TransactionTypes.Purchase,
     quantity: 2,
@@ -29,7 +29,7 @@ export default [
   },
   {
     key: "3",
-    stock: "IRDM11",
+    symbol: "IRDM11",
     date: moment(),
     type: TransactionTypes.Purchase,
     quantity: 1,
@@ -37,7 +37,7 @@ export default [
   },
   {
     key: "4",
-    stock: "IRDM11",
+    symbol: "IRDM11",
     date: moment(),
     type: TransactionTypes.Purchase,
     quantity: 5,
@@ -45,7 +45,7 @@ export default [
   },
   {
     key: "5",
-    stock: "IRDM11",
+    symbol: "IRDM11",
     date: moment(),
     type: TransactionTypes.Purchase,
     quantity: 1,
@@ -53,7 +53,7 @@ export default [
   },
   {
     key: "6",
-    stock: "IRDM11",
+    symbol: "IRDM11",
     date: moment(),
     type: TransactionTypes.Purchase,
     quantity: 1,
